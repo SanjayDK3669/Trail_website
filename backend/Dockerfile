@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y build-essential default-libmysqlclient-
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend/app
-COPY backend/gunicorn_conf.py
+COPY backend/app /app
+COPY backend/gunicorn_conf.py /gunicorn_conf.py
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
