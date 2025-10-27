@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    container_name: contact-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    depends_on: []
+    networks:
+      - contact-net
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: contact-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/public:/usr/share/nginx/html:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - contact-net
+
+networks:
+  contact-net:
+    driver: bridge
