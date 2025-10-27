@@ -12,7 +12,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app /app/app
-COPY gunicorn_conf.py /app/gunicorn_conf.py
+COPY gunicorn_conf.py /gunicorn_conf.py
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
