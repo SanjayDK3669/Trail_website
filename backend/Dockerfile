@@ -5,14 +5,14 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# system deps for mysql driver
+# System dependencies for MySQL
 RUN apt-get update && apt-get install -y build-essential default-libmysqlclient-dev gcc --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app /app/app
-COPY gunicorn_conf.py /gunicorn_conf.py
+COPY backend /app/app
+COPY backend/gunicorn_conf.py /gunicorn_conf.py
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
